@@ -1,4 +1,7 @@
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.swabra
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.ant
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.gradle
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.maven
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
@@ -28,7 +31,6 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2020.1"
 
 project {
-    vcsRoot(MyVcs)
     buildType(Build)
 }
 
@@ -36,11 +38,14 @@ object Build : BuildType({
     name = "Build"
 
     vcs {
-        root(MyVcs) // use the current one
+
+        root(DslContext.settingsRoot) // use the current one
     }
 
     steps {
+
         maven {
+
             goals = "clean package"
             runnerArgs = "-Dmaven.test.failure.ignore=true"
         }
@@ -50,9 +55,8 @@ object Build : BuildType({
         vcs {
         }
     }
-})
 
-object MyVcs: GitVcsRoot({
-    name = "MBVCs"
-    url = "https://github.com/marcobehler/spring-petclinic.git"
+    features {
+        swabra {  }
+    }
 })
