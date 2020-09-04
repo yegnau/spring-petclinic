@@ -1,6 +1,7 @@
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.maven
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
+import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -35,7 +36,7 @@ object Build : BuildType({
     name = "Build"
 
     vcs {
-        root(DslContext.settingsRoot)
+        root(MyVcs) // use the current one
     }
 
     steps {
@@ -49,4 +50,9 @@ object Build : BuildType({
         vcs {
         }
     }
+})
+
+object MyVcs: GitVcsRoot({
+    name = "MBVCs"
+    url = "https://github.com/marcobehler/spring-petclinic.git"
 })
