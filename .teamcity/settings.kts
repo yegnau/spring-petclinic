@@ -60,3 +60,13 @@ object Build : BuildType({
         swabra {  }
     }
 })
+
+fun cleanFiles(buildType: BuildType): BuildType {
+    if (buildType.features.items.find { it.type == "swabra" } == null) {
+        buildType.features {
+            swabra {
+            }
+        }
+    }
+    return buildType
+}
