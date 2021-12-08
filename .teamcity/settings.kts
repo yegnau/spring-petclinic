@@ -1,8 +1,7 @@
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildFeatures.swabra
-import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.ant
-import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.gradle
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.maven
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
 
@@ -31,22 +30,19 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2021.2"
 
 project {
-    buildType(BuildMaven)
     buildType(BuildWithArtifacts)
+    buildType(Build)
 }
 
-object BuildMaven : BuildType({
-    name = "Maven Build"
+object Build : BuildType({
+    name = "Build Maven"
 
     vcs {
-
         root(DslContext.settingsRoot) // use the current one
     }
 
     steps {
-
         maven {
-
             goals = "clean package"
             runnerArgs = "-Dmaven.test.failure.ignore=true"
         }
@@ -58,7 +54,8 @@ object BuildMaven : BuildType({
     }
 
     features {
-        swabra {  }
+        swabra {
+        }
     }
 })
 
@@ -83,12 +80,9 @@ object BuildWithArtifacts : BuildType({
     }
 })
 
-fun cleanFiles(buildType: BuildType): BuildType {
-    if (buildType.features.items.find { it.type == "swabra" } == null) {
-        buildType.features {
-            swabra {
-            }
-        }
-    }
-    return buildType
-}
+/*object HttpsGithubComMarcobehlerSpringPetclinicRefsHeadsMain : GitVcsRoot({
+    name = "https://github.com/marcobehler/spring-petclinic/#refs/heads/main"
+    url = "https://github.com/marcobehler/spring-petclinic/"
+    branch = "refs/heads/main"
+    branchSpec = "refs/heads/*"
+})*/
