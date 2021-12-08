@@ -1,4 +1,4 @@
-# Spring PetClinic Sample Application [![Build Status](https://travis-ci.org/spring-projects/spring-petclinic.png?branch=main)](https://travis-ci.org/spring-projects/spring-petclinic/)
+# Spring PetClinic Sample Application (https://travis-ci.org/spring-projects/spring-petclinic/) ![TeamCity build status](https://yegnau.teamcity.com/app/rest/builds/buildType:id:SpringPetclinic1_Build/statusIcon.svg)
 
 ## Understanding the Spring Petclinic application with a few diagrams
 <a href="https://speakerdeck.com/michaelisvy/spring-petclinic-sample-application">See the presentation here</a>
