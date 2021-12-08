@@ -31,11 +31,11 @@ To debug in IntelliJ Idea, open the 'Maven Projects' tool window (View
 version = "2020.1"
 
 project {
-    buildType(Build)
-    buildType(Build)
+    buildType(BuildMaven)
+    buildType(BuildWithArtifacts)
 }
 
-object Build : BuildType({
+object BuildMaven : BuildType({
     name = "Maven Build"
 
     vcs {
@@ -62,7 +62,7 @@ object Build : BuildType({
     }
 })
 
-object Build : BuildType({
+object BuildWithArtifacts : BuildType({
     name = "Build with artifacts"
 
     artifactRules = "=>artifacts"
