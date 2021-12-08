@@ -45,6 +45,7 @@ object Build : BuildType({
         maven {
             goals = "clean package"
             runnerArgs = "-Dmaven.test.failure.ignore=true"
+            dockerImage = "maven"
         }
     }
 
