@@ -35,7 +35,7 @@ project {
 }
 
 object Build : BuildType({
-    name = "Build"
+    name = "Maven Build"
 
     vcs {
 
@@ -58,6 +58,27 @@ object Build : BuildType({
 
     features {
         swabra {  }
+    }
+})
+
+object Build : BuildType({
+    name = "Build with artifacts"
+
+    artifactRules = "=>artifacts"
+
+    steps {
+        script {
+            name = "Create 1 MB file"
+            scriptContent = "fallocate -l 1MB file_1mb"
+        }
+        script {
+            name = "Create 5 MB file"
+            scriptContent = "fallocate -l 5MB file_5mb"
+        }
+        script {
+            name = "Create 1 GB file"
+            scriptContent = "fallocate -l 1G file_1gb"
+        }
     }
 })
 
