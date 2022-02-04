@@ -15,3 +15,11 @@ blocks:
       env_vars:
         - name: FOO_1
           value: BAR_1
+    dependencies: []
+  - name: 'Block #2'
+    dependencies: []
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - fallocate -l 5MB file_1mb
