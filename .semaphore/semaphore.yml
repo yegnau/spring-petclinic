@@ -1,0 +1,17 @@
+version: v1.0
+name: Java
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+blocks:
+  - name: Maven
+    task:
+      jobs:
+        - name: Build
+          commands:
+            - checkout
+            - mvn -B clean package -Dmaven.test.failure.ignore=true --file pom.xml
+      env_vars:
+        - name: FOO_1
+          value: BAR_1
