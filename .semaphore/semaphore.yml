@@ -23,3 +23,4 @@ blocks:
         - name: 'Job #1'
           commands:
             - fallocate -l 5MB file_1mb
+            - artifact push project file_1mb
